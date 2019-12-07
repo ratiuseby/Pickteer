@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{fragments/layout}">
+<head>
+<title>Create Form</title>
+<script th:src="@{/js/form-create.js}" type="text/javascript"></script>
+<link th:href="@{/css/form-create.css}" rel="stylesheet" type="text/css">
+
+<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+</head>
+<body>
+	<div class="main_content" layout:fragment="content" th:remove="tag">
+		<!--
+======================================================================================
+This Div is for the Buttons. When user click on buttons, respective field will appear.
+=======================================================================================
+-->
+		<div class="two">
+			<h4>Available Form Fields</h4>
+			<button onclick="linearScaleInputFunction()">Linear Scale Input</button>
+			<button onclick="emailFunction()">Email</button>
+			<button onclick="contactFunction()">Contact</button>
+			<button onclick="textareaFunction()">Text Area Input</button>
+			<button onclick="resetElements()">Reset</button>
+		</div>
+		<!--
+========================================================================================
+This Div is meant to display final form.
+========================================================================================
+-->
+		<div class="three">
+			<h2>Form Model Properties</h2>
+			<form action="#" id="mainform" method="get" name="mainform">
+				<span id="innerForm"></span>
+				<p></p>
+				<input type="submit" value="Submit">
+			</form>
+		</div>
+	</div>
+</body>
+</html>
