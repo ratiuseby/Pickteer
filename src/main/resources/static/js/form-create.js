@@ -76,8 +76,10 @@ function linearScaleInputFunction() {
 	inputDesired.setAttribute("placeholder", "Desired value");
 	inputDesired.setAttribute("id", "inputDesired_" + i);
 	inputDesired.setAttribute("name", "inputDesired_" + i);
-	inputDesired.setAttribute("min", "0");
-	inputDesired.setAttribute("max", "10");
+	inputDesired.setAttribute("min", inputMinVal.value);
+	inputMinVal.oninput = function() {inputDesired.setAttribute("min", inputMinVal.value)}; 
+	inputDesired.setAttribute("max", inputMaxVal.value);
+	inputMaxVal.oninput = function() {inputDesired.setAttribute("max", inputMaxVal.value)};
 	
 	var deleteImg = document.createElement("i");
 	deleteImg.setAttribute("class", "w3-jumbo fa fa-trash");
