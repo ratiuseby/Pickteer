@@ -9,7 +9,6 @@ width:246px;
 height:40px;
 color:#4C4C4C;
 margin-bottom:20px;
-margin-left:20px
 }
 input{
 width:280px;
@@ -46,8 +45,9 @@ color:#fff
 .two{
 background-color:#fff;
 width:290px;
-float:left;
-height:600px
+height:600px;
+position: fixed;
+text-align:center
 }
 .main_content{
 width:960px;
@@ -66,8 +66,8 @@ text-align:center
 text-align:center;
 width:660px;
 border-left:1px solid #D0D0D0;
-float:left;
-background-color:#fff
+background-color:#fff;
+float: right
 }
 .four,.first{
 width:960px;
@@ -75,3 +75,29 @@ clear:both;
 background-color:#41A2CD;
 height:55px
 }
+[data-tooltip]:before {
+    /* needed - do not touch */
+    content: attr(data-tooltip);
+    position: absolute;
+    opacity: 0;
+    
+    /* customizable */
+    transition: all 0.15s ease;
+    padding: 10px;
+    color: #333;
+    border-radius: 10px;
+    box-shadow: 2px 2px 1px silver;    
+}
+[data-tooltip]:hover:before {
+    /* needed - do not touch */
+    opacity: 1;
+    
+    /* customizable */
+    background: yellow;
+    margin-top: -50px;
+    margin-left: 20px;    
+}
+[data-tooltip]:not([data-tooltip-persistent]):before {
+    pointer-events: none;
+}
+

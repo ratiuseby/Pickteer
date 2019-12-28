@@ -1,5 +1,10 @@
 var i = 0 /* Set Global Variable i */
 var answerIndex = 1 /* Set Global Variable answerIndex */
+
+$(document).ready(function(){
+	  $('[data-toggle="tooltip"]').tooltip();   
+	});
+
 function increment() {
 	i += 1 /* Function for automatic increment of field's "Name" attribute. */
 }
@@ -42,6 +47,23 @@ function addElementAnswer(parentDiv) {
 	input.setAttribute("required", "true")
 	
 	parent.insertBefore(input, parent.lastChild.previousSibling)
+}
+
+/*
+ * ---------------------------------------------
+ * 
+ * Function to Delete Form Elements Answers Dynamically
+ * ---------------------------------------------
+ * 
+ */
+function deleteElementAnswer(parentDiv) {
+	var parent = document.getElementById(parentDiv)
+	
+	if(parent.childElementCount > 6) {
+		answerIndex -= 1
+	
+		parent.removeChild(parent.lastChild.previousSibling.previousSibling)
+	}
 }
 
 /*
@@ -153,9 +175,20 @@ function singleChoiceFunction() {
 	var addAnswer = document.createElement("i")
 	addAnswer.setAttribute("class", "w3-xxlarge fa fa-plus")
 	addAnswer.setAttribute("onclick", "addElementAnswer('id_" + i + "')")
+	addAnswer.setAttribute("data-toggle", "tooltip")
+	addAnswer.setAttribute("title", "Add an answer")
 	addAnswer.style.position = "absolute"
 	addAnswer.style.float = "right"
-	addAnswer.style.margin = "23px 0px 0px 8px"
+	addAnswer.style.margin = "23px 0px 0px 10px"
+		
+	var deleteAnswer = document.createElement("i")
+	deleteAnswer.setAttribute("class", "w3-xxlarge fa fa-minus")
+	deleteAnswer.setAttribute("onclick", "deleteElementAnswer('id_" + i + "')")
+	deleteAnswer.setAttribute("data-toggle", "tooltip")
+	deleteAnswer.setAttribute("title", "Delete an answer")
+	deleteAnswer.style.position = "absolute"
+	deleteAnswer.style.float = "right"
+	deleteAnswer.style.margin = "23px 0px 0px 45px"
 	
 	var inputDesired = document.createElement("input")
 	inputDesired.setAttribute("type", "number")
@@ -165,11 +198,14 @@ function singleChoiceFunction() {
 	inputDesired.setAttribute("required", "true")
 	inputDesired.setAttribute("min", 1)
 	inputDesired.setAttribute("max", 1)
-	addAnswer.onclick = function() {	addElementAnswer('id_' + i)
+	addAnswer.onclick = function() {	addElementAnswer(container.getAttribute("id"))
 										inputDesired.setAttribute("max", answerIndex)}
+	deleteAnswer.onclick = function() {	deleteElementAnswer(container.getAttribute("id"))
+		inputDesired.setAttribute("max", answerIndex)}
 	
 	container.appendChild(labelQuestion)
 	container.appendChild(addAnswer)
+	container.appendChild(deleteAnswer)
 	container.appendChild(input)
 	container.appendChild(inputDesired)
 	container.appendChild(deleteImg)
