@@ -6,7 +6,7 @@
     <footer>
         <div class="container">
             <p>
-                &copy; Pickteer - Ratiu Sebastian 2019 		All rights reserved.
+                &copy; Pickteer, Ratiu Sebastian 2019<script>new Date().getFullYear()>2019&&document.write("-"+new Date().getFullYear());</script>&emsp; All rights reserved.
                 <span sec:authorize="isAuthenticated()" style="display: inline-block;">
                     | Logged user: <span sec:authentication="name"></span> |
                     <a th:href="@{/logout}">Sign Out</a>

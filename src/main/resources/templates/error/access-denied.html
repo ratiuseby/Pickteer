@@ -3,11 +3,15 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Access Denied</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
 <body>
-<div th:remove="tag">
-    <h1>Access denied</h1>
-    <p><a href="/home" th:href="@{/home}">Back to home page</a></p>
-</div>
+	<div th:remove="tag">
+	    <div class="jumbotron" >
+			<h1 class="text-center"><i class="fa fa-frown-o"> </i>Access denied!</h1>
+			<p class="text-center"><a class="btn btn-primary" href="/user" th:href="@{/user}"><i class="fa fa-home"></i>Go Home</a></p>
+		</div>
+	</div>
 </body>
 </html>
