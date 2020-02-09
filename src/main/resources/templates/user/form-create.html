@@ -24,6 +24,9 @@ This Div is for the Buttons. When user click on buttons, respective field will a
 			<button onclick="multipleChoiceFunction()">Multiple Choice</button>
 			<button onclick="textareaFunction()">Text Area</button>
 			<button onclick="resetElements()">Reset</button>
+			<form th:action="@{/user/form-save}" id="savebuttonform" method="POST" name="savebuttonform">
+				<button>Save Form</button>
+			</form>
 		</div>
 		<!--
 ========================================================================================
@@ -32,14 +35,15 @@ This Div is meant to display final form.
 -->
 		<div class="three">
 			<h2>Form Model Properties</h2>
+			
 			<form th:action="@{/user/form-create}" id="mainform" method="POST" name="mainform">
 				<input type="text" id="title" name="title" placeholder="Form Title" required>
 				<hr>
 				<span id="innerForm"></span>
 				<p></p>
 				<input type="submit" value="Submit">
-<!-- 				<input type="submit" value="Save Form"> -->
 			</form>
+			
 		</div>
 	</div>
 </body>
