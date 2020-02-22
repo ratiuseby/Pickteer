@@ -102,8 +102,8 @@ function linearScaleInputFunction() {
 	
 	var labelQuestion = document.createElement("input")
 	labelQuestion.setAttribute("type", "text")
-	labelQuestion.setAttribute("id", "label_text_box_" + i)
-	labelQuestion.setAttribute("name", "label_text_box_" + i)
+	labelQuestion.setAttribute("id", "label_question_" + i)
+	labelQuestion.setAttribute("name", "label_question_" + i)
 	labelQuestion.setAttribute("placeholder", "Question")
 	labelQuestion.setAttribute("required", "true")
 	
@@ -127,14 +127,14 @@ function linearScaleInputFunction() {
 	
 	var labelLow = document.createElement("input")
 	labelLow.setAttribute("type", "text")
-	labelLow.setAttribute("id", "label_low_linearscale_text_box_" + i)
-	labelLow.setAttribute("name", "label_low_linearscale_text_box_" + i)
+	labelLow.setAttribute("id", "label_low_" + i)
+	labelLow.setAttribute("name", "label_low_" + i)
 	labelLow.setAttribute("placeholder", "Low Label (Optional)")
 	
 	var labelHigh = document.createElement("input")
 	labelHigh.setAttribute("type", "text")
-	labelHigh.setAttribute("id", "label_high_linearscale_text_box_" + i)
-	labelHigh.setAttribute("name", "label_high_linearscale_text_box_" + i)
+	labelHigh.setAttribute("id", "label_high_" + i)
+	labelHigh.setAttribute("name", "label_high_" + i)
 	labelHigh.setAttribute("placeholder", "High Label (Optional)")
 	
 	var inputDesired = document.createElement("input")
@@ -181,16 +181,16 @@ function singleChoiceFunction() {
 	
 	var labelQuestion = document.createElement("input")
 	labelQuestion.setAttribute("type", "text")
-	labelQuestion.setAttribute("id", "labelQuestion_text_box_" + i)
-	labelQuestion.setAttribute("name", "labelQuestion_text_box_" + i)
+	labelQuestion.setAttribute("id", "label_question_" + i)
+	labelQuestion.setAttribute("name", "label_question_" + i)
 	labelQuestion.setAttribute("placeholder", "Question")
 	labelQuestion.setAttribute("required", "true")
 
 	var input = document.createElement("input")
 	input.setAttribute("type", "text")
 	input.setAttribute("placeholder", "Answer")
-	input.setAttribute("id", "formelement_" + i + "_1")
-	input.setAttribute("name", "formelement_" + i + "_1")
+	input.setAttribute("id", "single_answer_" + i + "_1")
+	input.setAttribute("name", "single_answer_" + i + "_1")
 	input.setAttribute("required", "true")
 	
 	var deleteImg = document.createElement("i")
@@ -257,16 +257,16 @@ function multipleChoiceFunction() {
 	
 	var labelQuestion = document.createElement("input")
 	labelQuestion.setAttribute("type", "text")
-	labelQuestion.setAttribute("id", "labelQuestion_text_box_" + i)
-	labelQuestion.setAttribute("name", "labelQuestion_text_box_" + i)
+	labelQuestion.setAttribute("id", "label_question_" + i)
+	labelQuestion.setAttribute("name", "label_question_" + i)
 	labelQuestion.setAttribute("placeholder", "Question")
 	labelQuestion.setAttribute("required", "true")
 
 	var input = document.createElement("input")
 	input.setAttribute("type", "text")
 	input.setAttribute("placeholder", "Answer")
-	input.setAttribute("id", "formelement_" + i + "_1")
-	input.setAttribute("name", "formelement_" + i + "_1")
+	input.setAttribute("id", "multiple_answer_" + i + "_1")
+	input.setAttribute("name", "multiple_answer_" + i + "_1")
 	input.setAttribute("required", "true")
 	
 	var deleteImg = document.createElement("i")
@@ -332,8 +332,8 @@ function textareaFunction() {
 	
 	var labelQuestion = document.createElement("input")
 	labelQuestion.setAttribute("type", "text")
-	labelQuestion.setAttribute("id", "label_text_box_" + i)
-	labelQuestion.setAttribute("name", "label_text_box_" + i)
+	labelQuestion.setAttribute("id", "label_question_" + i)
+	labelQuestion.setAttribute("name", "label_question_" + i)
 	labelQuestion.setAttribute("placeholder", "Question")
 	labelQuestion.setAttribute("required", "true")
 
@@ -359,7 +359,7 @@ function textareaFunction() {
 	
 	$([document.documentElement, document.body]).animate({
         scrollTop: $("#id_" + i).offset().top
-    }, 500);
+    }, 500)
 }
 /*
  * -----------------------------------------------------------------------------
@@ -369,14 +369,15 @@ function textareaFunction() {
  * ------------------------------------------------------------------------------
  */
 async function resetElements() {
-	var r = confirm("Are you sure you want to reset the form?");
+	var r = confirm("Are you sure you want to reset the form?")
     if (r == true) {
     	$([document.documentElement, document.body]).animate({
             scrollTop: $("#title").offset().top
-        }, 500);
+        }, 500)
     	
-    	await new Promise(resolve => setTimeout(resolve, 500));
+    	await new Promise(resolve => setTimeout(resolve, 500))
     	document.getElementById('innerForm').innerHTML = ''
+    	i = 0
     }
 	
 }

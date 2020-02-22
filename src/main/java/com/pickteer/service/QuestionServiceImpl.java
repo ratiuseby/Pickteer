@@ -1,7 +1,6 @@
 package com.pickteer.service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,7 @@ import com.pickteer.repository.QuestionRepository;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {
-	
+
 	@Autowired
 	private QuestionRepository questionRepository;
 
@@ -28,13 +27,18 @@ public class QuestionServiceImpl implements QuestionService {
 
 	@Override
 	public List<Question> getQuestions() {
-        return (List<Question>) questionRepository.findAll();
+		return questionRepository.findAll();
 	}
 
 	@Override
-	public Question getQuestionById(long id) throws NoSuchElementException {
+	public Question getQuestionById(long id) {
 		Optional<Question> optionalQuestion = questionRepository.findById(id);
-        return optionalQuestion.get();
+
+		if (!optionalQuestion.isPresent()) {
+			return new Question();
+		} else {
+			return optionalQuestion.get();
+		}
 	}
 
 }

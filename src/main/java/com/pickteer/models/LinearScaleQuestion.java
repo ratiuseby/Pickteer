@@ -12,10 +12,10 @@ public class LinearScaleQuestion extends Question {
 	private String lowLabel;
 	private String highLabel;
 	
-	public LinearScaleQuestion() {}
+	public LinearScaleQuestion() { setQuestionType(QuestionType.LINEAR_SCALE);}
 
-	public LinearScaleQuestion(String questionText, String questionType, String desiredValue, int lowValue, int highValue, String lowLabel, String highLabel) {
-		super(questionText, questionType, desiredValue);
+	public LinearScaleQuestion(String questionText, String desiredValue, int lowValue, int highValue, String lowLabel, String highLabel) {
+		super(questionText, QuestionType.LINEAR_SCALE, desiredValue);
 		this.lowValue = lowValue;
 		this.highValue = highValue;
 		this.lowLabel = lowLabel;
@@ -53,5 +53,15 @@ public class LinearScaleQuestion extends Question {
 	public void setHighLabel(String highLabel) {
 		this.highLabel = highLabel;
 	}
-
+	
+	public boolean isEmpty() {
+		return highValue == 0;
+	}
+	
+	public void reset() {
+		lowValue = 0;
+		highValue = 0;
+		lowLabel = "";
+		highLabel = "";
+	}
 }

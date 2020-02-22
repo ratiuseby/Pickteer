@@ -8,29 +8,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.pickteer.service.QuestionService;
+import com.pickteer.service.FormService;
 
 @Controller
 public class FormCreateController {
 
-	@Autowired QuestionService service;
-	
-	@GetMapping( "/user/form-create")
+	@Autowired
+	FormService service;
+
+	@GetMapping(Mappings.USER_FORM_CREATE)
 	public String getPage() {
-		return "user/form-create";
+		return Mappings.USER_FORM_CREATE;
 	}
-	
-	@PostMapping( value="/user/form-create", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+
+	@PostMapping(value = Mappings.USER_FORM_CREATE, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public String getForm(@RequestBody MultiValueMap<String, String> formData) {
-		
-		formData.forEach((k, v) -> System.out.println((k + ":" + v)));
-		return "user/form-create";
-	}
-	
-	@PostMapping( value="/user/form-save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public String saveForm(@RequestBody MultiValueMap<String, String> formData) {
-		
-		formData.forEach((k, v) -> System.out.println((k + ":" + v)));
-		return "user/form-create";
+		service.add(service.createForm(formData));
+		return Mappings.USER_FORM_CREATE;
 	}
 }

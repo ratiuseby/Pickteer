@@ -1,7 +1,9 @@
 package com.pickteer.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -9,12 +11,13 @@ import javax.persistence.Table;
 @Table(name = "MultipleChoiceQuestion")
 public class MultipleChoiceQuestion extends Question {
 
+	@ElementCollection
 	private List<String> answerList;
 	
-	public MultipleChoiceQuestion() {}
+	public MultipleChoiceQuestion() { setQuestionType(QuestionType.MULTIPLE_CHOICE); answerList = new ArrayList<>();}
 	
-	public MultipleChoiceQuestion(String questionText, String questionType, String desiredValue, List<String> answerList) {
-		super(questionText, questionType, desiredValue);
+	public MultipleChoiceQuestion(String questionText, String desiredValue, List<String> answerList) {
+		super(questionText, QuestionType.MULTIPLE_CHOICE, desiredValue);
 		this.answerList = answerList;
 	}
 	
@@ -25,5 +28,14 @@ public class MultipleChoiceQuestion extends Question {
 	public void setAnswerList(List<String> answerList) {
 		this.answerList = answerList;
 	}
-
+	
+	public boolean isEmpty() {
+		return answerList.isEmpty();
+	}
+	
+	@Override
+	public void reset() {
+		answerList.clear();
+	}
+	
 }

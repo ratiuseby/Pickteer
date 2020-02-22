@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org"
-      layout:decorate="~{fragments/layout}">
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{fragments/layout}">
 <head>
-    <title>Home</title>
+<title>Home</title>
 </head>
 <body>
-<div layout:fragment="content" th:remove="tag">
-    <h1>This is a secured page!</h1>
-    <p><a href="/user" th:href="@{/user}">Back to home page</a></p>
-</div>
+	<div layout:fragment="content" th:remove="tag">
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Questions number</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${forms.empty}">
+		            <td colspan="2"> No forms available !</td>
+		        </tr>
+				<tr th:each="form : ${forms}">
+					<td th:text="${form.name}"></td>
+					<td th:text="${#lists.size(form.questions)}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </body>
 </html>
