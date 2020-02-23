@@ -29,7 +29,9 @@ public class FormServiceImpl implements FormService {
 
 	@Override
 	public void delete(long id) {
-		formRepository.deleteById(id);
+		if(getFormById(id).getName() != null) {
+			formRepository.deleteById(id);
+		}
 	}
 
 	@Override
@@ -64,6 +66,11 @@ public class FormServiceImpl implements FormService {
 				form.setName(v.get(0));
 
 			} else if (k.contains(InputKeys.QUESTION_TEXT)) {
+				linearScaleQuestion.reset();
+				singleChoiceQuestion.reset();
+				multipleChoiceQuestion.reset();
+				textAreaQuestion.reset();
+				question.reset();
 				question.setQuestionText(v.get(0));
 
 			} else if (k.contains(InputKeys.LINEAR_SCALE_VALUE_LOW)) {
@@ -86,39 +93,35 @@ public class FormServiceImpl implements FormService {
 
 			} else if (k.contains(InputKeys.INPUT_DESIRED)) {
 				question.setDesiredValue(v.get(0));
-
+				
 				if (!linearScaleQuestion.isEmpty()) {
-					linearScaleQuestion.setQuestionText(question.getQuestionText());
-					linearScaleQuestion.setDesiredValue(question.getDesiredValue());
+					LinearScaleQuestion volatileLinearScaleQuestion = new LinearScaleQuestion(linearScaleQuestion);
+					volatileLinearScaleQuestion.setQuestionText(question.getQuestionText());
+					volatileLinearScaleQuestion.setDesiredValue(question.getDesiredValue());
 
-					form.getQuestions().add(linearScaleQuestion);
+					form.getQuestions().add(volatileLinearScaleQuestion);
 
-					linearScaleQuestion.reset();
-					question.reset();
 				} else if (!singleChoiceQuestion.isEmpty()) {
-					singleChoiceQuestion.setQuestionText(question.getQuestionText());
-					singleChoiceQuestion.setDesiredValue(question.getDesiredValue());
+					SingleChoiceQuestion volatileSingleChoiceQuestion = new SingleChoiceQuestion(singleChoiceQuestion);
+					volatileSingleChoiceQuestion.setQuestionText(question.getQuestionText());
+					volatileSingleChoiceQuestion.setDesiredValue(question.getDesiredValue());
 
-					form.getQuestions().add(singleChoiceQuestion);
+					form.getQuestions().add(volatileSingleChoiceQuestion);
 
-					singleChoiceQuestion.reset();
-					question.reset();
 				} else if (!multipleChoiceQuestion.isEmpty()) {
-					multipleChoiceQuestion.setQuestionText(question.getQuestionText());
-					multipleChoiceQuestion.setDesiredValue(question.getDesiredValue());
+					MultipleChoiceQuestion volatileMultipleChoiceQuestion = new MultipleChoiceQuestion(multipleChoiceQuestion);
+					volatileMultipleChoiceQuestion.setQuestionText(question.getQuestionText());
+					volatileMultipleChoiceQuestion.setDesiredValue(question.getDesiredValue());
 
-					form.getQuestions().add(multipleChoiceQuestion);
+					form.getQuestions().add(volatileMultipleChoiceQuestion);
 
-					multipleChoiceQuestion.reset();
-					question.reset();
 				} else {
-					textAreaQuestion.setQuestionText(question.getQuestionText());
-					textAreaQuestion.setDesiredValue(question.getDesiredValue());
+					TextAreaQuestion volatileTextAreaQuestion = new TextAreaQuestion();
+					volatileTextAreaQuestion.setQuestionText(question.getQuestionText());
+					volatileTextAreaQuestion.setDesiredValue(question.getDesiredValue());
+					
+					form.getQuestions().add(volatileTextAreaQuestion);
 
-					form.getQuestions().add(textAreaQuestion);
-
-					textAreaQuestion.reset();
-					question.reset();
 				}
 			}
 		});

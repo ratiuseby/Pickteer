@@ -8,6 +8,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 
+import com.pickteer.controllers.Mappings;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,7 +33,7 @@ public class LoggingAccessDeniedHandler implements AccessDeniedHandler {
                     + request.getRequestURI());
         }
 
-        response.sendRedirect(request.getContextPath() + "/access-denied");
+        response.sendRedirect(request.getContextPath() + Mappings.ACCESS_DENIED);
 
     }
 }

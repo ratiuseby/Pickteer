@@ -21,8 +21,8 @@
 						<h2>Number of questions: [[${#lists.size(form.questions)}]]</h2>
 					</div>
 					<div class="card-footer">
-						<div style="display: none" id="link">[[${#httpServletRequest.scheme}]]://[[${#httpServletRequest.serverName}]]/?id=[[${form.id}]]</div>
-						<span class="link"><a href="javascript:void(0)" onclick="copyToClipboard('link')"><i class="w3-xxlarge fa fa-link"></i></a></span>
+						<div style="display: none" th:id="'link' + ${form.id}">[[${#httpServletRequest.scheme}]]://[[${#httpServletRequest.serverName}]]/?id=[[${form.id}]]</div>
+						<span class="link"><a href="javascript:void(0)" th:onclick="|copyToClipboard('link${form.id}')|"><i class="w3-xxlarge fa fa-link" data-toggle="tooltip" title="Copy link to clipboard"></i></a></span>
 						<span class="trash"><a th:href="@{'/user?id=' + ${form.id}}"><i class="w3-xxlarge fa fa-trash"></i></a></span>
 					</div>
 				</article>

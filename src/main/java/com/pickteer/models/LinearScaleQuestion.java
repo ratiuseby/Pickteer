@@ -6,7 +6,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "LinearScaleQuestion")
 public class LinearScaleQuestion extends Question {
-
+	
 	private int lowValue;
 	private int highValue;
 	private String lowLabel;
@@ -20,6 +20,13 @@ public class LinearScaleQuestion extends Question {
 		this.highValue = highValue;
 		this.lowLabel = lowLabel;
 		this.highLabel = highLabel;
+	}
+	
+	public LinearScaleQuestion( LinearScaleQuestion linearScaleQuestion) {
+		this.lowValue = linearScaleQuestion.lowValue;
+		this.highValue = linearScaleQuestion.highValue;
+		this.lowLabel = linearScaleQuestion.lowLabel;
+		this.highLabel = linearScaleQuestion.highLabel;
 	}
 
 	public int getLowValue() {
@@ -58,7 +65,9 @@ public class LinearScaleQuestion extends Question {
 		return highValue == 0;
 	}
 	
+	@Override
 	public void reset() {
+		super.reset();
 		lowValue = 0;
 		highValue = 0;
 		lowLabel = "";

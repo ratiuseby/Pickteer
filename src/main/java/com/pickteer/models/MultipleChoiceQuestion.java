@@ -21,6 +21,10 @@ public class MultipleChoiceQuestion extends Question {
 		this.answerList = answerList;
 	}
 	
+	public MultipleChoiceQuestion(MultipleChoiceQuestion multipleChoiceQuestion) {
+		this.answerList = multipleChoiceQuestion.answerList;
+	}
+	
 	public List<String> getAnswerList() {
 		return answerList;
 	}
@@ -35,6 +39,7 @@ public class MultipleChoiceQuestion extends Question {
 	
 	@Override
 	public void reset() {
+		super.reset();
 		answerList.clear();
 	}
 	

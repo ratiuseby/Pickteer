@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.pickteer.controllers.Mappings;
 import com.pickteer.service.UserService;
 
 @Configuration
@@ -28,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         web.ignoring().antMatchers("/resources/**");
     }
 	
+	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.requiresChannel()
         .requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
@@ -37,23 +39,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         .and()
         .authorizeRequests()
         	.antMatchers(
-        		"/",
+        		Mappings.ROOT,
                 "/js/**",
                 "/css/**",
                 "/img/**",
                 "/icons/**",
                 "/webjars/**").permitAll()
-        	.antMatchers("/user/**").authenticated()
+        	.antMatchers(Mappings.USER_PAGE + "/**").authenticated()
 		.and()
         .formLogin()
-			.loginPage("/")
+			.loginPage(Mappings.ROOT)
 			.permitAll()
-			.defaultSuccessUrl("/user")
+			.defaultSuccessUrl(Mappings.USER_PAGE)
 		.and()
         .logout()
 	        .invalidateHttpSession(true)
 	        .clearAuthentication(true)
-	        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+	        .logoutRequestMatcher(new AntPathRequestMatcher(Mappings.LOGOUT))
 	        .logoutSuccessUrl("/?logout")
 	        .permitAll()
 	    .and()

@@ -16,9 +16,8 @@ public class SingleChoiceQuestion extends Question {
 	
 	public SingleChoiceQuestion() { setQuestionType(QuestionType.SINGLE_CHOICE); answerList = new ArrayList<>();}
 
-	public SingleChoiceQuestion(String questionText, String desiredValue, List<String> answerList) {
-		super(questionText, QuestionType.SINGLE_CHOICE, desiredValue);
-		this.answerList = answerList;
+	public SingleChoiceQuestion(SingleChoiceQuestion singleChoiceQuestion) {
+		this.answerList = singleChoiceQuestion.answerList;
 	}
 
 	public List<String> getAnswerList() {
@@ -35,6 +34,7 @@ public class SingleChoiceQuestion extends Question {
 	
 	@Override
 	public void reset() {
+		super.reset();
 		answerList.clear();
 	}
 

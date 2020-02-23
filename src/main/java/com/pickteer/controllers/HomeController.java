@@ -21,7 +21,7 @@ public class HomeController {
 	@Autowired
 	UserService userService;
 
-	@GetMapping("/user")
+	@GetMapping(Mappings.USER_PAGE)
 	public String getPage(Model model, Principal principal, @RequestParam Optional<String> id) {
 
 		if(id.isPresent()) {

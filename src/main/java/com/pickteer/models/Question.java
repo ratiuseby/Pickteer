@@ -14,10 +14,14 @@ import javax.persistence.Table;
 @DiscriminatorColumn(name = "descriminatorColumn")
 @Table(name = "Question")
 public class Question {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
+	public Long getId() {
+		return id;
+	}
 
 	private String questionText;
 	private QuestionType questionType;
@@ -30,10 +34,6 @@ public class Question {
 		this.questionText = questionText;
 		this.questionType = questionType;
 		this.desiredValue = desiredValue;
-	}
-
-	public Long getId() {
-		return id;
 	}
 
 	public String getQuestionText() {
@@ -63,5 +63,11 @@ public class Question {
 	public void reset() {
 		questionText = "";
 		desiredValue = "";
+	}
+
+	@Override
+	public String toString() {
+		return "Question [questionText=" + questionText + ", questionType=" + questionType
+				+ ", desiredValue=" + desiredValue + "]";
 	}
 }
