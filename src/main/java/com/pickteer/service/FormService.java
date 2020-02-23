@@ -11,7 +11,7 @@ public interface FormService {
 
 	public void delete(long id);
 
-	public List<Form> getForms();
+	public List<Form> getForms(long userId);
 
 	public Form getFormById(long id);
 

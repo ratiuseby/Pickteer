@@ -33,8 +33,8 @@ public class FormServiceImpl implements FormService {
 	}
 
 	@Override
-	public List<Form> getForms() {
-		return formRepository.findAll();
+	public List<Form> getForms(long userId) {
+		return formRepository.findByUserId(userId);
 	}
 
 	@Override

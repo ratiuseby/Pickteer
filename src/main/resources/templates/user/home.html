@@ -4,26 +4,30 @@
 	layout:decorate="~{fragments/layout}">
 <head>
 <title>Home</title>
+<link th:href="@{/css/home.css}" rel="stylesheet" type="text/css">
+<script th:src="@{/js/home.js}" type="text/javascript"></script>
 </head>
 <body>
 	<div layout:fragment="content" th:remove="tag">
-		<table>
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Questions number</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:if="${forms.empty}">
-		            <td colspan="2"> No forms available !</td>
-		        </tr>
-				<tr th:each="form : ${forms}">
-					<td th:text="${form.name}"></td>
-					<td th:text="${#lists.size(form.questions)}"></td>
-				</tr>
-			</tbody>
-		</table>
+		<section class="cards">
+			<div th:if="${forms.empty}">No forms available !</div>
+			<div th:each="form : ${forms}">
+				<article class="card">
+					<picture class="thumbnail">
+						<img class="category__01" src="https://abbeyjfitzgerald.com/wp-content/uploads/2018/01/list-1.svg" th:alt="${form.name}"/>
+					</picture>
+					<div class="card-content">
+						<p class="category category__01" th:text="${form.name}"></p>
+						<h2>Number of questions: [[${#lists.size(form.questions)}]]</h2>
+					</div>
+					<div class="card-footer">
+						<div style="display: none" id="link">[[${#httpServletRequest.scheme}]]://[[${#httpServletRequest.serverName}]]/?id=[[${form.id}]]</div>
+						<span class="link"><a href="javascript:void(0)" onclick="copyToClipboard('link')"><i class="w3-xxlarge fa fa-link"></i></a></span>
+						<span class="trash"><a th:href="@{'/user?id=' + ${form.id}}"><i class="w3-xxlarge fa fa-trash"></i></a></span>
+					</div>
+				</article>
+			</div>
+		</section>
 	</div>
 </body>
 </html>
