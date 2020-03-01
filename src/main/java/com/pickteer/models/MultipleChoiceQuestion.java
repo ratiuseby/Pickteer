@@ -22,6 +22,7 @@ public class MultipleChoiceQuestion extends Question {
 	}
 	
 	public MultipleChoiceQuestion(MultipleChoiceQuestion multipleChoiceQuestion) {
+		super(null, QuestionType.MULTIPLE_CHOICE, null);
 		this.answerList = multipleChoiceQuestion.answerList;
 	}
 	

@@ -23,6 +23,7 @@ public class LinearScaleQuestion extends Question {
 	}
 	
 	public LinearScaleQuestion( LinearScaleQuestion linearScaleQuestion) {
+		super(null, QuestionType.LINEAR_SCALE, null);
 		this.lowValue = linearScaleQuestion.lowValue;
 		this.highValue = linearScaleQuestion.highValue;
 		this.lowLabel = linearScaleQuestion.lowLabel;

@@ -1,18 +1,52 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Create Form</title>
-<script th:src="@{/js/form-create.js}" type="text/javascript"></script>
-<link th:href="@{/css/form-create.css}" rel="stylesheet" type="text/css">
+<title>[[${form.name}]]</title>
 
-<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
-<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+<link rel='shortcut icon' type='image/x-icon'
+	th:href="@{/icons/logo.ico}" />
+<link rel='icon' type='image/x-icon' th:href="@{/icons/logo.ico}" />
+<script th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"
+	type="text/javascript"></script>
+<link th:href="@{/css/form.css}" rel="stylesheet" type="text/css">
+
 </head>
 <body>
-	<div>[[${form.name}]]</div>
-	<ul th:each="question : ${form.questions}">
-		<li th:text="${question.questionText}"></li>
-	</ul>
+	<header><h2><strong>[[${form.name}]]</strong></h2></header>
+	
+	<form class="rb-box" id="form-container" th:each="question : ${form.questions}">
+		<div th:switch="${question.questionType}">
+
+			<p th:text="${question.questionText}"></p>
+			<div th:case="${T(com.pickteer.models.QuestionType).LINEAR_SCALE}">
+				<div id="r8-balloon-radio-group-wrapper">
+			      	<ul>
+			      		<li class="r8-balloon-radio-group-wrapper-li" th:text="${question.lowLabel}"></li>
+			      		<li class="r8-balloon-radio-group-wrapper-li-rotate" th:each="index : ${#numbers.sequence(question.lowValue, question.highValue)}">
+				      		<input type="radio" class="radio r8-radio-float" th:name="radio_group_ + ${questionStat.count}" th:id="${index}"/>
+							<label th:for="${index}"></label>
+			      		</li>
+			      		<li class="r8-balloon-radio-group-wrapper-li" th:text="${question.highLabel}"></li>
+			      	</ul>
+			    </div>
+			</div>
+			
+			<div th:case="${T(com.pickteer.models.QuestionType).SINGLE_CHOICE}">
+			</div> 
+			
+			<div th:case="${T(com.pickteer.models.QuestionType).MULTIPLE_CHOICE}">
+			</div> 
+			
+			<div th:case="${T(com.pickteer.models.QuestionType).TEXT_AREA}">
+			</div>
+		</div>
+		
+		<div class="button-box">
+			<button class="button trigger">Submit</button>
+		</div>
+	</form>
+	
 </body>
 </html>

@@ -16,7 +16,13 @@ public class SingleChoiceQuestion extends Question {
 	
 	public SingleChoiceQuestion() { setQuestionType(QuestionType.SINGLE_CHOICE); answerList = new ArrayList<>();}
 
+	public SingleChoiceQuestion(String questionText, String desiredValue, List<String> answerList) {
+		super(questionText, QuestionType.MULTIPLE_CHOICE, desiredValue);
+		this.answerList = answerList;
+	}
+	
 	public SingleChoiceQuestion(SingleChoiceQuestion singleChoiceQuestion) {
+		super(null, QuestionType.MULTIPLE_CHOICE, null);
 		this.answerList = singleChoiceQuestion.answerList;
 	}
 
