@@ -14,9 +14,14 @@
 
 </head>
 <body>
+
+	<div th:if="${param.message != null}">
+		<div class="alert alert-info">Thank you for the answers!</div>
+	</div>
 	<header><h2><strong>[[${form.name}]]</strong></h2></header>
 	
-	<form class="rb-box" id="form-container" >
+	<form th:action="@{/form}" method="POST" class="rb-box" id="form-container" >
+		<input type="hidden" name="id" th:value="${param.id}" />
 		<div th:each="question,iter : ${form.questions}">
 			<div th:switch="${question.questionType}">
 	
@@ -26,7 +31,7 @@
 				      	<ul>
 				      		<li class="r8-balloon-radio-group-wrapper-li" th:text="${question.lowLabel}"></li>
 				      		<li class="r8-balloon-radio-group-wrapper-li-rotate" th:each="index : ${#numbers.sequence(question.lowValue, question.highValue)}">
-					      		<input type="radio" class="radio r8-radio-float" th:name="group_ + ${iter.count}" th:id="group_ + ${iter.count} + '_' + ${index}"/>
+					      		<input type="radio" class="radio r8-radio-float" th:name="group_ + ${iter.count}" th:id="group_ + ${iter.count} + '_' + ${index}" required/>
 								<label th:text="${index}" th:for="group_ + ${iter.count} + '_' + ${index}" ></label>
 				      		</li>
 				      		<li class="r8-balloon-radio-group-wrapper-li" th:text="${question.highLabel}"></li>
@@ -36,22 +41,22 @@
 				
 				<div th:case="${T(com.pickteer.models.QuestionType).SINGLE_CHOICE}">
 					<div style="margin-bottom: 5rem">
-						<label class="answer" th:each="answer : ${question.answerList}">
-							<input type="radio" class="option-input radio" th:text="${answer}" th:name="group_ + ${iter.count}" th:id="group_ + ${iter.count} + '_1'"/>
+						<label class="answer" th:each="answer,iter2 : ${question.answerList}">
+							<input type="radio" class="option-input radio" th:text="${answer}" th:name="group_ + ${iter.count}" th:id="group_ + ${iter.count} + '_' + ${iter2.count}" required/>
 						</label>
 					</div>
 				</div> 
 				
 				<div th:case="${T(com.pickteer.models.QuestionType).MULTIPLE_CHOICE}">
 					<div style="margin-bottom: 5rem">
-						<label class="answer" th:each="answer : ${question.answerList}">
-							<input type="checkbox" class="option-input checkbox" th:text="${answer}" th:name="group_ + ${iter.count}" th:id="group_ + ${iter.count} + '_1'"/>
+						<label class="answer" th:each="answer,iter2 : ${question.answerList}">
+							<input type="checkbox" class="option-input checkbox" th:text="${answer}" th:name="group_ + ${iter.count}" th:id="group_ + ${iter.count} + '_' + ${iter2.count}"/>
 						</label>
 					</div>
 				</div> 
 				
-				<div th:case="${T(com.pickteer.models.QuestionType).TEXT_AREA}">
-					<textarea class="form-control" rows="3"></textarea>
+				<div th:case="${T(com.pickteer.models.QuestionType).TEXT_AREA}" th:name="group_ + ${iter.count}" th:id="group_ + ${iter.count}">
+					<textarea class="form-control" rows="3" required></textarea>
 				</div>
 			</div>
 		</div>

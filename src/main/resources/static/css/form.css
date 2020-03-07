@@ -21,6 +21,12 @@ h2 {
 	padding: 1em;
 }
 
+.alert {
+    text-align: center;
+    width: 50%;
+    margin: 3rem 25%;
+}
+
 .rb-box {
 	width: 80%;
 	max-width: 720px;

@@ -11,4 +11,5 @@ public class Mappings {
 	public static final String LOGOUT = "/logout";
 	public static final String ACCESS_DENIED = "/access-denied";
 	public static final String ERROR = "/error";
+	public static final String FORM = "/form";
 }
