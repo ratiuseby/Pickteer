@@ -8,5 +8,7 @@ import javax.persistence.Table;
 public class TextAreaQuestion extends Question {
 
 	public TextAreaQuestion() { setQuestionType(QuestionType.TEXT_AREA);}
+	public TextAreaQuestion(String questionText, String desiredValue) { super(questionText, QuestionType.TEXT_AREA, desiredValue);}
+	
 
 }

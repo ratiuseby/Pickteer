@@ -87,7 +87,7 @@ public class FormServiceImpl implements FormService {
 
 			} else if (k.contains(InputKeys.SINGLE_ANSWER)) {
 				singleChoiceQuestion.getAnswerList().add(v.get(0));
-
+				
 			} else if (k.contains(InputKeys.MULTIPLE_ANSWER)) {
 				multipleChoiceQuestion.getAnswerList().add(v.get(0));
 
@@ -95,37 +95,21 @@ public class FormServiceImpl implements FormService {
 				question.setDesiredValue(v.get(0));
 				
 				if (!linearScaleQuestion.isEmpty()) {
-					LinearScaleQuestion volatileLinearScaleQuestion = new LinearScaleQuestion(linearScaleQuestion);
-					volatileLinearScaleQuestion.setQuestionText(question.getQuestionText());
-					volatileLinearScaleQuestion.setDesiredValue(question.getDesiredValue());
-
-					form.getQuestions().add(volatileLinearScaleQuestion);
+					form.getQuestions().add(new LinearScaleQuestion(linearScaleQuestion, question.getQuestionText(), question.getDesiredValue()));
 
 				} else if (!singleChoiceQuestion.isEmpty()) {
-					SingleChoiceQuestion volatileSingleChoiceQuestion = new SingleChoiceQuestion(singleChoiceQuestion);
-					volatileSingleChoiceQuestion.setQuestionText(question.getQuestionText());
-					volatileSingleChoiceQuestion.setDesiredValue(question.getDesiredValue());
-
-					form.getQuestions().add(volatileSingleChoiceQuestion);
+					form.getQuestions().add(new SingleChoiceQuestion(singleChoiceQuestion, question.getQuestionText(), question.getDesiredValue()));
 
 				} else if (!multipleChoiceQuestion.isEmpty()) {
-					MultipleChoiceQuestion volatileMultipleChoiceQuestion = new MultipleChoiceQuestion(multipleChoiceQuestion);
-					volatileMultipleChoiceQuestion.setQuestionText(question.getQuestionText());
-					volatileMultipleChoiceQuestion.setDesiredValue(question.getDesiredValue());
-
-					form.getQuestions().add(volatileMultipleChoiceQuestion);
+					form.getQuestions().add(new MultipleChoiceQuestion(multipleChoiceQuestion, question.getQuestionText(), question.getDesiredValue()));
 
 				} else {
-					TextAreaQuestion volatileTextAreaQuestion = new TextAreaQuestion();
-					volatileTextAreaQuestion.setQuestionText(question.getQuestionText());
-					volatileTextAreaQuestion.setDesiredValue(question.getDesiredValue());
-					
-					form.getQuestions().add(volatileTextAreaQuestion);
+					form.getQuestions().add(new TextAreaQuestion(question.getQuestionText(), question.getDesiredValue()));
 
 				}
 			}
 		});
-
+		
 		return form;
 	}
 

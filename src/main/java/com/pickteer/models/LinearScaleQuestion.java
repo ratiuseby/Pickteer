@@ -22,8 +22,8 @@ public class LinearScaleQuestion extends Question {
 		this.highLabel = highLabel;
 	}
 	
-	public LinearScaleQuestion( LinearScaleQuestion linearScaleQuestion) {
-		super(null, QuestionType.LINEAR_SCALE, null);
+	public LinearScaleQuestion( LinearScaleQuestion linearScaleQuestion, String questionText, String desiredValue) {
+		super(questionText, QuestionType.LINEAR_SCALE, desiredValue);
 		this.lowValue = linearScaleQuestion.lowValue;
 		this.highValue = linearScaleQuestion.highValue;
 		this.lowLabel = linearScaleQuestion.lowLabel;

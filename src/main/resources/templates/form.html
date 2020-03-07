@@ -8,7 +8,7 @@
 <link rel='shortcut icon' type='image/x-icon'
 	th:href="@{/icons/logo.ico}" />
 <link rel='icon' type='image/x-icon' th:href="@{/icons/logo.ico}" />
-<script th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"
+<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"
 	type="text/javascript"></script>
 <link th:href="@{/css/form.css}" rel="stylesheet" type="text/css">
 
@@ -16,30 +16,43 @@
 <body>
 	<header><h2><strong>[[${form.name}]]</strong></h2></header>
 	
-	<form class="rb-box" id="form-container" th:each="question : ${form.questions}">
-		<div th:switch="${question.questionType}">
-
-			<p th:text="${question.questionText}"></p>
-			<div th:case="${T(com.pickteer.models.QuestionType).LINEAR_SCALE}">
-				<div id="r8-balloon-radio-group-wrapper">
-			      	<ul>
-			      		<li class="r8-balloon-radio-group-wrapper-li" th:text="${question.lowLabel}"></li>
-			      		<li class="r8-balloon-radio-group-wrapper-li-rotate" th:each="index : ${#numbers.sequence(question.lowValue, question.highValue)}">
-				      		<input type="radio" class="radio r8-radio-float" th:name="radio_group_ + ${questionStat.count}" th:id="${index}"/>
-							<label th:for="${index}"></label>
-			      		</li>
-			      		<li class="r8-balloon-radio-group-wrapper-li" th:text="${question.highLabel}"></li>
-			      	</ul>
-			    </div>
-			</div>
-			
-			<div th:case="${T(com.pickteer.models.QuestionType).SINGLE_CHOICE}">
-			</div> 
-			
-			<div th:case="${T(com.pickteer.models.QuestionType).MULTIPLE_CHOICE}">
-			</div> 
-			
-			<div th:case="${T(com.pickteer.models.QuestionType).TEXT_AREA}">
+	<form class="rb-box" id="form-container" >
+		<div th:each="question,iter : ${form.questions}">
+			<div th:switch="${question.questionType}">
+	
+				<p th:text="${question.questionText}"></p>
+				<div th:case="${T(com.pickteer.models.QuestionType).LINEAR_SCALE}">
+					<div id="r8-balloon-radio-group-wrapper">
+				      	<ul>
+				      		<li class="r8-balloon-radio-group-wrapper-li" th:text="${question.lowLabel}"></li>
+				      		<li class="r8-balloon-radio-group-wrapper-li-rotate" th:each="index : ${#numbers.sequence(question.lowValue, question.highValue)}">
+					      		<input type="radio" class="radio r8-radio-float" th:name="group_ + ${iter.count}" th:id="group_ + ${iter.count} + '_' + ${index}"/>
+								<label th:text="${index}" th:for="group_ + ${iter.count} + '_' + ${index}" ></label>
+				      		</li>
+				      		<li class="r8-balloon-radio-group-wrapper-li" th:text="${question.highLabel}"></li>
+				      	</ul>
+				    </div>
+				</div>
+				
+				<div th:case="${T(com.pickteer.models.QuestionType).SINGLE_CHOICE}">
+					<div style="margin-bottom: 5rem">
+						<label class="answer" th:each="answer : ${question.answerList}">
+							<input type="radio" class="option-input radio" th:text="${answer}" th:name="group_ + ${iter.count}" th:id="group_ + ${iter.count} + '_1'"/>
+						</label>
+					</div>
+				</div> 
+				
+				<div th:case="${T(com.pickteer.models.QuestionType).MULTIPLE_CHOICE}">
+					<div style="margin-bottom: 5rem">
+						<label class="answer" th:each="answer : ${question.answerList}">
+							<input type="checkbox" class="option-input checkbox" th:text="${answer}" th:name="group_ + ${iter.count}" th:id="group_ + ${iter.count} + '_1'"/>
+						</label>
+					</div>
+				</div> 
+				
+				<div th:case="${T(com.pickteer.models.QuestionType).TEXT_AREA}">
+					<textarea class="form-control" rows="3"></textarea>
+				</div>
 			</div>
 		</div>
 		

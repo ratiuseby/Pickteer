@@ -43,8 +43,13 @@ function addElementAnswer(parentDiv) {
 	var input = document.createElement("input")
 	input.setAttribute("type", "text")
 	input.setAttribute("placeholder", "Answer")
-	input.setAttribute("id", "formelement_" + parentDiv.split(/[_ ]+/).pop() + "_" + (parent.childElementCount - 4))
-	input.setAttribute("name", "formelement_" + parentDiv.split(/[_ ]+/).pop() + "_" + (parent.childElementCount - 4))
+	if(parent.getAttribute("id").includes("single")) {
+		input.setAttribute("id", "single_answer_" + parentDiv.split(/[_ ]+/).pop() + "_" + (parent.childElementCount - 4))
+		input.setAttribute("name", "single_answer_" + parentDiv.split(/[_ ]+/).pop() + "_" + (parent.childElementCount - 4))
+	} else {
+		input.setAttribute("id", "multiple_answer_" + parentDiv.split(/[_ ]+/).pop() + "_" + (parent.childElementCount - 4))
+		input.setAttribute("name", "multiple_answer_" + parentDiv.split(/[_ ]+/).pop() + "_" + (parent.childElementCount - 4))
+	}
 	input.setAttribute("required", "true")
 	
 	parent.insertBefore(input, parent.lastChild.previousSibling)
@@ -195,7 +200,7 @@ function singleChoiceFunction() {
 	
 	var deleteImg = document.createElement("i")
 	deleteImg.setAttribute("class", "w3-jumbo fa fa-trash")
-	deleteImg.setAttribute("onclick", "removeElement('innerForm','id_" + i + "')")
+	deleteImg.setAttribute("onclick", "removeElement('innerForm','id_single_" + i + "')")
 	
 	var addAnswer = document.createElement("i")
 	addAnswer.setAttribute("class", "w3-xxlarge fa fa-plus")
@@ -234,12 +239,12 @@ function singleChoiceFunction() {
 	container.appendChild(input)
 	container.appendChild(inputDesired)
 	container.appendChild(deleteImg)
-	container.setAttribute("id", "id_" + i)
+	container.setAttribute("id", "id_single_" + i)
 	
 	document.getElementById("innerForm").appendChild(container)
 	
 	$([document.documentElement, document.body]).animate({
-        scrollTop: $("#id_" + i).offset().top
+        scrollTop: $("#id_single_" + i).offset().top
     }, 500);
 }
 /*
@@ -271,7 +276,7 @@ function multipleChoiceFunction() {
 	
 	var deleteImg = document.createElement("i")
 	deleteImg.setAttribute("class", "w3-jumbo fa fa-trash")
-	deleteImg.setAttribute("onclick", "removeElement('innerForm','id_" + i + "')")
+	deleteImg.setAttribute("onclick", "removeElement('innerForm','id_multiple_" + i + "')")
 	
 	var addAnswer = document.createElement("i")
 	addAnswer.setAttribute("class", "w3-xxlarge fa fa-plus")
@@ -309,12 +314,12 @@ function multipleChoiceFunction() {
 	container.appendChild(input)
 	container.appendChild(inputDesired)
 	container.appendChild(deleteImg)
-	container.setAttribute("id", "id_" + i)
+	container.setAttribute("id", "id_multiple_" + i)
 	
 	document.getElementById("innerForm").appendChild(container)
 	
 	$([document.documentElement, document.body]).animate({
-        scrollTop: $("#id_" + i).offset().top
+        scrollTop: $("#id_multiple_" + i).offset().top
     }, 500);
 }
 /*

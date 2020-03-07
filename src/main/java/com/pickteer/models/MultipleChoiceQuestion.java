@@ -21,9 +21,9 @@ public class MultipleChoiceQuestion extends Question {
 		this.answerList = answerList;
 	}
 	
-	public MultipleChoiceQuestion(MultipleChoiceQuestion multipleChoiceQuestion) {
-		super(null, QuestionType.MULTIPLE_CHOICE, null);
-		this.answerList = multipleChoiceQuestion.answerList;
+	public MultipleChoiceQuestion(MultipleChoiceQuestion multipleChoiceQuestion, String questionText, String desiredValue) {
+		super(questionText, QuestionType.MULTIPLE_CHOICE, desiredValue);
+		this.answerList = new ArrayList<String>(multipleChoiceQuestion.getAnswerList());
 	}
 	
 	public List<String> getAnswerList() {
