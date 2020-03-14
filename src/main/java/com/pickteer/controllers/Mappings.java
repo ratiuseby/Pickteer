@@ -12,4 +12,5 @@ public class Mappings {
 	public static final String ACCESS_DENIED = "/access-denied";
 	public static final String ERROR = "/error";
 	public static final String FORM = "/form";
+	public static final String EXPORT_DATA = "user/export";
 }

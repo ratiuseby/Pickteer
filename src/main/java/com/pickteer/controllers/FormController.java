@@ -1,5 +1,6 @@
 package com.pickteer.controllers;
 
+import java.security.Principal;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,8 @@ public class FormController {
 	FormService service;
 	
 	@PostMapping(value = Mappings.FORM, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public String getFormAnswers(@RequestBody MultiValueMap<String, String> formData, Model model, @RequestParam Optional<String> id) {
-		formData.forEach( (k,v) -> {
-			System.out.println( k + " : " + v.get(0));
-		});
+    public String getFormAnswers(@RequestBody MultiValueMap<String, String> formData, Model model, @RequestParam Optional<String> id, Principal principal) {
+		service.checkAnswers(formData, Integer.parseInt(id.get()), principal);
 		
         return "redirect:" + Mappings.ROOT + "?id=" + id.orElse("") + "&message=thank-you";
     }

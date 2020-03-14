@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{fragments/layout}">
+<head>
+<title>Export Data</title>
+<link th:href="@{/css/export.css}" rel="stylesheet" type="text/css">
+<script th:src="@{/js/export.js}" type="text/javascript"></script>
+</head>
+<body>
+	<div layout:fragment="content" th:remove="tag">
+		<section class="cards">
+			<div th:if="${forms.empty}">No forms available !</div>
+			<div th:each="form : ${forms}">
+				<article class="card">
+					<picture class="thumbnail">
+						<img class="category__03" src="https://abbeyjfitzgerald.com/wp-content/uploads/2017/10/browser-icon-01.svg" th:alt="${form.key}"/>
+					</picture>
+					<div class="card-content">
+						<p class="category category__03" th:text="${form.key}"></p>
+						<h2>Number of answers: [[${form.value}]]</h2>
+					</div>
+					<div class="card-footer">
+					</div>
+				</article>
+			</div>
+		</section>
+	</div>
+</body>
+</html>
