@@ -14,13 +14,15 @@
 			<div th:each="form : ${forms}">
 				<article class="card">
 					<picture class="thumbnail">
-						<img class="category__03" src="https://abbeyjfitzgerald.com/wp-content/uploads/2017/10/browser-icon-01.svg" th:alt="${form.key}"/>
+						<img class="category__03" src="https://abbeyjfitzgerald.com/wp-content/uploads/2017/10/browser-icon-01.svg" th:alt="${form.key.formName}"/>
 					</picture>
 					<div class="card-content">
-						<p class="category category__03" th:text="${form.key}"></p>
+						<p class="category category__03" th:text="${form.key.formName}"></p>
 						<h2>Number of answers: [[${form.value}]]</h2>
 					</div>
 					<div class="card-footer">
+						<span class="link"><a th:href="@{'/user/export/download?id=' + ${form.key.formId}}"><i class="w3-xxlarge fa fa-download" data-toggle="tooltip" title="Download answer sheet"></i></a></span>
+						<span class="trash"><a th:href="@{'/user/export?id=' + ${form.key.formId}}"><i class="w3-xxlarge fa fa-trash"></i></a></span>
 					</div>
 				</article>
 			</div>

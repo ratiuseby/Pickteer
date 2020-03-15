@@ -30,6 +30,8 @@ public class FormAnswer {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private User user;
 	
+	private Long formId;
+	
 	@ElementCollection
 	@JoinTable(name="answers", joinColumns=@JoinColumn(name="id"))
 	@MapKeyColumn (name="question")
@@ -50,12 +52,28 @@ public class FormAnswer {
 		this.points = points;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public User getUser() {
 		return user;
 	}
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Long getFormId() {
+		return formId;
+	}
+
+	public void setFormId(Long formId) {
+		this.formId = formId;
 	}
 
 	public Map<String, String> getAnswers() {
@@ -80,6 +98,33 @@ public class FormAnswer {
 
 	public void setPoints(int points) {
 		this.points = points;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((formId == null) ? 0 : formId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FormAnswer other = (FormAnswer) obj;
+		if (formId == null) {
+			if (other.formId != null)
+				return false;
+		} else {
+			if (!formId.equals(other.formId))
+				return false;
+		}
+		return true;
 	}
 
 }

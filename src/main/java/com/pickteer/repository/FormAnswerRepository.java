@@ -11,4 +11,5 @@ import com.pickteer.models.FormAnswer;
 @Repository
 public interface FormAnswerRepository extends JpaRepository < FormAnswer, Long > {
 	public List<FormAnswer> findByUserId(long userId);
+	public List<FormAnswer> findByFormId(long formId);
 }

@@ -1,5 +1,6 @@
 package com.pickteer.service;
 
+import java.io.ByteArrayInputStream;
 import java.util.List;
 
 import com.pickteer.models.FormAnswer;
@@ -12,4 +13,6 @@ public interface FormAnswerService {
 	public List<FormAnswer> getFormAnswers(long userId);
 
 	public FormAnswer getFormById(long id);
+	
+	public ByteArrayInputStream download(long id);
 }

@@ -149,6 +149,7 @@ public class FormServiceImpl implements FormService {
 	        answer.setPoints(points);
 	        answer.setUser(userService.findByUsername(principal.getName()));
 	        answer.setFormName(form.getName());
+	        answer.setFormId(id);
 	        formAnswerService.add(answer);
 	    }
 		
