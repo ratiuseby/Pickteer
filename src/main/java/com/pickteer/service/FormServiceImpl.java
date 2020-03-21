@@ -162,7 +162,8 @@ public class FormServiceImpl implements FormService {
 		
 		switch (question.getQuestionType()) {
 		case LINEAR_SCALE:
-			return 1 - Math.abs( (Integer.parseInt(question.getDesiredValue()) - Integer.parseInt(givenAnswer)) * 0.2);
+			double multiplier = 1 - Math.abs( (Integer.parseInt(question.getDesiredValue()) - Integer.parseInt(givenAnswer)) * 0.2);
+			return multiplier > 0d ? multiplier : 0d;
 			
 		case MULTIPLE_CHOICE:
 			String[] indexes = question.getDesiredValue().split(",");

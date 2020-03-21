@@ -14,4 +14,5 @@ public class Mappings {
 	public static final String FORM = "/form";
 	public static final String EXPORT_DATA = "user/export";
 	public static final String DOWLOAD = "user/export/download";
+	public static final String VIEW_DATA = "user/view";
 }

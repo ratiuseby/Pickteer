@@ -57,13 +57,13 @@ textarea {
 	width: 290px;
 	height: 600px;
 	position: fixed;
-	text-align: center
+	text-align: center;
 }
 
 .main_content {
 	width: 960px;
 	height: auto;
-	background-color: #fff
+	background-color: #fff;
 }
 
 .two h4 {
@@ -110,6 +110,13 @@ button:active {
 	border-left: 1px solid #D0D0D0;
 	background-color: #fff;
 	float: right;
+}
+
+@media screen and (max-width: 600px) {
+	.three {
+		margin-top: 62rem;
+		
+	}	
 }
 
 .four, .first {

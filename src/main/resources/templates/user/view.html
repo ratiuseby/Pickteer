@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{fragments/layout}">
+<head>
+<title>View Data</title>
+<link th:href="@{/css/view.css}" rel="stylesheet" type="text/css">
+<script th:src="@{/js/view.js}" type="text/javascript"></script>
+</head>
+<body>
+	<div layout:fragment="content" th:remove="tag">
+
+		<select class="old-select">
+			<option>Select a form</option>
+			<option th:if="${forms.empty}">No forms available !</option>
+			<option th:id="${form.key}" th:each="form : ${forms}" th:value="${form.key}"
+				th:text="${form.key}"></option>
+		</select>
+
+		<div class="new-select">
+			<div class="selection">
+				<p>
+					<span></span> <i></i>
+				</p>
+				<span></span>
+			</div>
+		</div>
+
+		<div th:each="form : ${forms}" th:id="table_ + ${form.key}" class="table" style="overflow: auto; height: 300px; margin-top: 6rem; margin-bottom: 8rem;" hidden>
+			<table>
+				<tr>
+					<th th:each="question : ${form.value.get(0).answers}" th:text="${question.key}"></th>
+					<th>Points</th>
+				</tr>
+				<tr th:each="formAnswer : ${form.value}">
+					<td th:each="answer : ${formAnswer.answers}" th:text="${#strings.substring(answer.value, 1, #strings.length(answer.value) - 1)}"></td>
+					<td th:text="${formAnswer.points}"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
