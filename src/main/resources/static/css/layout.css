@@ -80,3 +80,14 @@ footer {
 footer p {
     padding: 15px;
 }
+
+@media screen and (max-width: 600px) {
+  footer {
+  	font-size: 1.2rem;
+  	height: 60px;
+  }
+  
+  footer p {
+    padding: 5px;
+  }
+}
