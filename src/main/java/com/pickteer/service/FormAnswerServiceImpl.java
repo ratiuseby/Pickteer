@@ -58,14 +58,14 @@ public class FormAnswerServiceImpl implements FormAnswerService {
 	@Override
 	public ByteArrayInputStream download(long id) {
 		
-		String[] columns = {"Name", "Email", "Points", "Form Name"};
+		String[] pointsColumns = {"Name", "Email", "Points", "Form Name"};
 		List<FormAnswer> list = formAnswerRepository.findByFormId(id);
 		if(!list.isEmpty()) {
 			
 			// Create a Workbook
 	        try(Workbook workbook = new XSSFWorkbook(); ) { // new HSSFWorkbook() for generating `.xls` file
 		        // Create a Sheet
-		        Sheet sheet = workbook.createSheet("Answers");
+		        Sheet sheet = workbook.createSheet("Points");
 	
 		        // Create a Font for styling header cells
 		        Font headerFont = workbook.createFont();
@@ -81,9 +81,9 @@ public class FormAnswerServiceImpl implements FormAnswerService {
 		        Row headerRow = sheet.createRow(0);
 	
 		        // Create cells
-		        for(int i = 0; i < columns.length; i++) {
+		        for(int i = 0; i < pointsColumns.length; i++) {
 		            Cell cell = headerRow.createCell(i);
-		            cell.setCellValue(columns[i]);
+		            cell.setCellValue(pointsColumns[i]);
 		            cell.setCellStyle(headerCellStyle);
 		        }
 	
@@ -98,17 +98,49 @@ public class FormAnswerServiceImpl implements FormAnswerService {
 		            row.createCell(1)
 		                    .setCellValue(formAnswer.getAnswers().get("Email"));
 	
-		            row.createCell(3)
+		            row.createCell(2)
 		                    .setCellValue(formAnswer.getPoints());
 		            
-		            row.createCell(4)
+		            row.createCell(3)
 	                		.setCellValue(formAnswer.getFormName());
 	
 		        }
 		            
 				// Resize all columns to fit the content size
-		        for(int i = 0; i < columns.length; i++) {
+		        for(int i = 0; i < pointsColumns.length; i++) {
 		            sheet.autoSizeColumn(i);
+		        }
+		        
+		        // Create a Sheet
+		        Sheet sheet2 = workbook.createSheet("Answers");
+	
+		        // Create a Row
+		        Row headerRow2 = sheet2.createRow(0);
+	
+		        // Create cells
+		        int i = 0;
+		        for(String key : list.get(0).getAnswers().keySet()) {
+		            Cell cell = headerRow2.createCell(i);
+		            i++;
+		            cell.setCellValue(key);
+		            cell.setCellStyle(headerCellStyle);
+		        }
+		        
+		        // Create Other rows and cells with employees data
+		        rowNum = 1;
+		        for(FormAnswer formAnswer : list) {
+		            Row row = sheet2.createRow(rowNum++);
+		            
+		            i = 0;
+		            for(String answer : formAnswer.getAnswers().values()) {
+		            	row.createCell(i).setCellValue(answer);
+		            	i++;
+		            }
+		        }
+	            
+				// Resize all columns to fit the content size
+		        for(i = 0; i < list.get(0).getAnswers().size(); i++) {
+		            sheet2.autoSizeColumn(i);
 		        }
 	
 		        // Write the output

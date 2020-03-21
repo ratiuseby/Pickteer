@@ -24,6 +24,13 @@
 	
 	<form th:action="@{/form}" method="POST" class="rb-box" id="form-container" >
 		<input type="hidden" name="id" th:value="${param.id}" />
+		
+		<p>Full Name</p>
+		<input type="text" class="text-answer" name="Name" required/>
+		
+		<p>Email</p>
+		<input type="email" class="text-answer" name="Email" required/>
+		
 		<div th:each="question,iter : ${form.questions}">
 			<div th:switch="${question.questionType}">
 	
