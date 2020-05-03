@@ -127,7 +127,7 @@ public class FormServiceImpl implements FormService {
 		
 		for (Map.Entry<String, List<String>> entry : formData.entrySet()) {
 			
-			if(!entry.getKey().contains("csrf") && !entry.getKey().contains("id")) {
+			if(!entry.getKey().contains("csrf") && !entry.getKey().equals("id")) {
 				answer.getAnswers().put(entry.getKey(), entry.getValue().toString());
 			}
 			
