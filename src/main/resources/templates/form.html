@@ -20,16 +20,16 @@
 	<div th:if="${param.message != null}">
 		<div class="alert alert-info">Thank you for the answers!</div>
 	</div>
-	<header><h2><strong>[[${form.name}]]</strong></h2></header>
+	<h2><strong>[[${form.name}]]</strong></h2>
 	
 	<form th:action="@{/form}" method="POST" class="rb-box" id="form-container" >
 		<input type="hidden" name="id" th:value="${param.id}" />
 		
 		<p>Full Name</p>
-		<input type="text" class="text-answer" name="Name" required/>
+		<input type="text" class="text-answer" name="Name" placeholder="not mandatory"/> 
 		
 		<p>Email</p>
-		<input type="email" class="text-answer" name="Email" required/>
+		<input type="email" class="text-answer" name="Email" placeholder="not mandatory"/>
 		
 		<div th:each="question,iter : ${form.questions}">
 			<div th:switch="${question.questionType}">
