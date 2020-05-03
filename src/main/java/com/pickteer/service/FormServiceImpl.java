@@ -1,6 +1,5 @@
 package com.pickteer.service;
 
-import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -28,9 +27,6 @@ public class FormServiceImpl implements FormService {
 	
 	@Autowired
 	private FormAnswerService formAnswerService;
-	
-	@Autowired
-	private UserService userService;
 
 	@Override
 	public void add(Form form) {
@@ -124,7 +120,7 @@ public class FormServiceImpl implements FormService {
 	}
 
 	@Override
-	public void checkAnswers(MultiValueMap<String, String> formData, long id, Principal principal) {
+	public void checkAnswers(MultiValueMap<String, String> formData, long id) {
 		Form form = getFormById(id);
 		int points = 0;
 		FormAnswer answer = new FormAnswer();
@@ -147,7 +143,7 @@ public class FormServiceImpl implements FormService {
 	        }
 	        
 	        answer.setPoints(points);
-	        answer.setUser(userService.findByUsername(principal.getName()));
+	        answer.setUser(form.getUser());
 	        answer.setFormName(form.getName());
 	        answer.setFormId(id);
 	        formAnswerService.add(answer);

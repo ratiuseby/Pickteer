@@ -22,7 +22,7 @@ public class FormController {
 	
 	@PostMapping(value = Mappings.FORM, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String getFormAnswers(@RequestBody MultiValueMap<String, String> formData, Model model, @RequestParam Optional<String> id, Principal principal) {
-		service.checkAnswers(formData, Integer.parseInt(id.get()), principal);
+		service.checkAnswers(formData, Integer.parseInt(id.get()));
 		
         return "redirect:" + Mappings.ROOT + "?id=" + id.orElse("") + "&message=thank-you";
     }

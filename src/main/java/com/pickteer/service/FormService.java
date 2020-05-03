@@ -1,6 +1,5 @@
 package com.pickteer.service;
 
-import java.security.Principal;
 import java.util.List;
 
 import org.springframework.util.MultiValueMap;
@@ -18,5 +17,5 @@ public interface FormService {
 
 	public Form createForm(MultiValueMap<String, String> formData);
 	
-	public void checkAnswers(MultiValueMap<String, String> formData, long id, Principal principal);
+	public void checkAnswers(MultiValueMap<String, String> formData, long id);
 }
